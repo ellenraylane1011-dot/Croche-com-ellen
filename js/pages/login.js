@@ -1,5 +1,5 @@
 import { sb } from '../supabase.js';
-import { el, $, ocupado, toast, whatsappBR, soDigitos } from '../ui.js';
+import { el, $, ocupado, toast, whatsappBR, soDigitos, pronto } from '../ui.js';
 
 const TERMOS_VERSAO = '2026-10';
 const NEXT_OK = ['cartao.html', 'mostruario.html'];      // lista fechada: sem redirecionamento aberto
@@ -41,6 +41,7 @@ function desenhar(aviso = null) {
     msg,
   );
 
+  pronto();
   $('#app').replaceChildren(
     el('header', { class: 'top' }, el('div', { class: 'brand' }, el('span', { class: 'kicker', text: 'crochê com' }), el('h1', { text: 'Ellen' }))),
     el('main', {},

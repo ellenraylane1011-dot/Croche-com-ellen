@@ -1,5 +1,5 @@
 import { sb, getSettings, fotoUrl } from '../supabase.js';
-import { el, $, brl, waLink, ocupado, toast, mensagemErro, montar, icone, NAV_CLIENTE } from '../ui.js';
+import { el, $, brl, waLink, ocupado, toast, mensagemErro, montar, icone, foto, NAV_CLIENTE } from '../ui.js';
 
 const LIMITE_ITEM = 20;
 const CHAVE_CARRINHO = 'ellen.carrinho.v1';
@@ -60,7 +60,7 @@ function cartaoProduto(p) {
     ? (esgotado(p) ? 'Todas já foram vendidas.' : (restam === 1 ? 'Última peça!' : `Restam ${restam}.`))
     : (p.prazo_texto || 'Feito sob encomenda.');
   return el('div', { class: 'prod' + (esgotado(p) ? ' esgotado' : '') },
-    el('div', { class: 'foto' }, url ? el('img', { src: url, alt: p.nome, loading: 'lazy' }) : icone('foto')),
+    foto(url, p.nome),
     el('div', { class: 'corpo' },
       el('span', { class: 'nome', text: p.nome }),
       el('span', { class: 'preco', text: brl(p.preco_centavos) }),

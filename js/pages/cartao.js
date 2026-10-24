@@ -1,6 +1,6 @@
 import { sb, getSettings, fotoUrl } from '../supabase.js';
 import { exigirUsuario, sair } from '../auth.js';
-import { el, $, brl, dataBR, waLink, whatsappBR, soDigitos, ocupado, toast, mensagemErro, montar, icone, NAV_CLIENTE } from '../ui.js';
+import { el, $, brl, dataBR, waLink, whatsappBR, soDigitos, ocupado, toast, mensagemErro, montar, icone, foto, NAV_CLIENTE } from '../ui.js';
 
 const { user, perfil } = await exigirUsuario();
 const cfg = await getSettings();
@@ -143,7 +143,7 @@ function carrossel(pecas) {
       const url = fotoUrl(p.foto_path);
       const exclusiva = p.tipo === 'exclusiva';
       return el('a', { class: 'slide', href: 'mostruario.html', 'aria-label': `${p.nome}, ${brl(p.preco_centavos)}. Ver no mostruário` },
-        el('div', { class: 'foto' }, url ? el('img', { src: url, alt: '', loading: 'lazy' }) : icone('foto')),
+        foto(url, ''),
         el('strong', { class: 'nome', text: p.nome }),
         el('span', { class: 'preco', text: brl(p.preco_centavos) }),
         el('span', { class: 'selo' + (exclusiva ? ' manteiga' : ''), text: exclusiva ? (p.quantidade > 0 ? `Exclusiva · restam ${p.quantidade}` : 'Esgotada') : 'Sob demanda' }));

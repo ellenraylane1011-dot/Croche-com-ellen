@@ -1,5 +1,5 @@
 import { sb } from '../supabase.js';
-import { el, $, ocupado, toast } from '../ui.js';
+import { el, $, ocupado, toast, pronto } from '../ui.js';
 
 // O link do e-mail traz a sessão de recuperação na URL (detectSessionInUrl).
 const form = el('form', { class: 'card', novalidate: true, onSubmit: async (e) => {
@@ -18,6 +18,7 @@ const form = el('form', { class: 'card', novalidate: true, onSubmit: async (e) =
     el('input', { id: 'nova', type: 'password', autocomplete: 'new-password', required: true, minlength: 8, placeholder: 'mínimo 8 caracteres' })),
   el('button', { class: 'btn bloco', type: 'submit', text: 'Salvar nova senha' }));
 
+pronto();
 $('#app').replaceChildren(
   el('header', { class: 'top' }, el('div', { class: 'brand' }, el('span', { class: 'kicker', text: 'crochê com Ellen' }), el('h1', { text: 'Nova senha' }))),
   el('main', {}, form, el('p', { class: 'center' }, el('a', { href: 'index.html', text: 'Voltar' }))),

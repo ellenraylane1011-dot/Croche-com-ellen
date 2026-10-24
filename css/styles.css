@@ -172,3 +172,32 @@ input[type=file]{min-height:var(--toque);font-size:14px}
 .slide .nome{font-size:15px;line-height:1.25}
 .slide .preco{font-family:var(--serif);font-size:18px;font-weight:700}
 .slide .selo{align-self:flex-start}
+
+/* esqueletos de carregamento (no lugar de "Carregando…") */
+.sk{position:relative;overflow:hidden;background:var(--areia);border-radius:12px}
+.sk::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);animation:sk-brilho 1.4s ease-in-out infinite}
+@keyframes sk-brilho{100%{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){.sk::after{animation:none}}
+.sk-linha{height:14px;border-radius:8px}
+.sk-linha.g{height:36px;border-radius:10px}
+.sk-kicker{width:110px;height:18px;border-radius:8px}
+.sk-h1{width:170px;height:32px;border-radius:10px;margin-top:4px}
+.sk-mascote{width:84px;height:73px;border-radius:20px;flex-shrink:0}
+.sk-mascote.grande{width:150px;height:130px;align-self:center}
+.sk-aba{height:52px;border-radius:999px}
+.sk-campo{height:48px;border-radius:16px}
+.sk-botao{height:48px;border-radius:999px}
+.sk-chip{width:96px;height:44px;border-radius:999px}
+.sk-barra{height:16px;border-radius:999px}
+.sk-slide{flex:0 0 min(62%,220px);height:210px;border-radius:20px}
+.sk-bloco{aspect-ratio:4/3;border-radius:0}
+.sk-nav{height:64px;border-radius:999px}
+.sk-item{height:64px;border-radius:18px}
+.w30{width:30%}.w40{width:40%}.w60{width:60%}.w80{width:80%}.w100{width:100%}
+.foto.sk{border-radius:0}
+
+/* escolha de foto (câmera ou galeria) */
+.previa{width:100%;max-height:240px;aspect-ratio:4/3;object-fit:cover;border-radius:16px;background:var(--areia);display:block}
+.previa-vazia{aspect-ratio:4/3;max-height:240px;border-radius:16px;border:2px dashed var(--linha);display:flex;align-items:center;justify-content:center;color:var(--muda);font-weight:700;font-size:14px;text-align:center;padding:12px}
+.thumb{width:48px;height:48px;border-radius:12px;overflow:hidden;background:var(--areia);display:flex;align-items:center;justify-content:center;color:var(--muda);flex-shrink:0}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}

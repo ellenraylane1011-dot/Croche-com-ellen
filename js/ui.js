@@ -99,6 +99,22 @@ export function icone(nome) {
   return s;
 }
 
+// Foto com esqueleto: o brilho some quando a imagem carrega; sem foto (ou com erro) mostra o ícone.
+export function foto(url, alt = '', classe = 'foto') {
+  const caixa = el('div', { class: classe });
+  if (!url) { caixa.append(icone('foto')); return caixa; }
+  caixa.classList.add('sk');
+  caixa.append(el('img', {
+    src: url, alt, loading: 'lazy',
+    onLoad: () => caixa.classList.remove('sk'),
+    onError: () => { caixa.classList.remove('sk'); caixa.replaceChildren(icone('foto')); },
+  }));
+  return caixa;
+}
+
+// Tira o estado "carregando" do leitor de tela quando a página já foi desenhada.
+export const pronto = () => $('#app')?.removeAttribute('aria-busy');
+
 export const NAV_CLIENTE = [
   { href: 'cartao.html', texto: 'Cartão', icone: 'cartao' },
   { href: 'mostruario.html', texto: 'Mostruário', icone: 'loja' },
@@ -119,6 +135,7 @@ export function montar({ kicker, titulo, nav, ativo, conteudo, extraDock = [], r
         el('nav', { 'aria-label': 'Navegação principal' },
           nav.map((i) => el('a', { href: i.href, 'aria-current': i.href === ativo ? 'page' : null }, icone(i.icone), i.texto))))
     : null;
+  pronto();
   $('#app').replaceChildren(
     el('header', { class: 'top' },
       el('div', { class: 'brand' }, el('span', { class: 'kicker', text: kickerTexto(kicker) }), el('h1', { text: titulo })),
