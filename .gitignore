@@ -1,0 +1,11 @@
+# Modo demonstração (dados falsos e contas de teste): só para testar no seu computador.
+# Fica fora do repositório e, portanto, fora do deploy.
+js/demo/
+
+# Segredos
+.env
+.env.*
+supabase/.temp/
+
+# Contém a senha da admin em texto: nunca vai para o GitHub
+supabase/criar-admin.sql
