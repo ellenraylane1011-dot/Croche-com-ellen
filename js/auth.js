@@ -5,7 +5,7 @@ export async function exigirUsuario(raiz = '') {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) {
     const alvo = location.pathname.split('/').pop();
-    const volta = raiz === '' && ['cartao.html', 'mostruario.html'].includes(alvo) ? `?next=${alvo}` : '';
+    const volta = raiz === '' && ['cartao.html', 'mostruario.html', 'conta.html'].includes(alvo) ? `?next=${alvo}` : '';
     location.replace(`${raiz}index.html${volta}`);
     return new Promise(() => {});            // interrompe o resto da página
   }

@@ -1,6 +1,6 @@
 import { sb, getSettings, fotoUrl } from '../supabase.js';
 import { exigirUsuario, sair } from '../auth.js';
-import { el, $, brl, dataBR, waLink, whatsappBR, soDigitos, ocupado, toast, mensagemErro, montar, icone, foto, NAV_CLIENTE } from '../ui.js';
+import { el, $, brl, dataBR, waLink, ocupado, toast, montar, icone, foto, NAV_CLIENTE } from '../ui.js';
 
 const { user, perfil } = await exigirUsuario();
 const cfg = await getSettings();
@@ -98,41 +98,8 @@ function desenhar({ marcas, total, compras, brindes, pecas }) {
     conteudo: [
       carrossel(pecas),
       el('div', { class: 'cols' }, el('div', { class: 'stack' }, progresso), el('div', { class: 'stack' }, formCodigo, historico)),
-      meusDados(),
     ],
   });
-}
-
-function meusDados() {
-  const nome = el('input', { id: 'm-nome', type: 'text', value: perfil?.nome ?? '', maxlength: 80, autocomplete: 'name' });
-  const zap = el('input', { id: 'm-zap', type: 'tel', inputmode: 'tel', value: perfil?.whatsapp ?? '', autocomplete: 'tel' });
-  const promo = el('input', { id: 'm-promo', type: 'checkbox', checked: perfil?.aceita_promocoes ? true : null });
-  return el('details', { class: 'card' },
-    el('summary', { style: { fontWeight: 800, cursor: 'pointer', minHeight: '44px', display: 'flex', alignItems: 'center' }, text: 'Meus dados e privacidade' }),
-    el('form', { class: 'stack', novalidate: true, onSubmit: async (e) => {
-      e.preventDefault();
-      await ocupado(e.submitter, async () => {
-        const dados = { nome: nome.value.trim(), whatsapp: whatsappBR(zap.value) || null, aceita_promocoes: promo.checked };
-        if (dados.nome.length < 2) return toast('Escreva seu nome.', 'erro');
-        if (dados.whatsapp && soDigitos(dados.whatsapp).length < 12) return toast('Confira o WhatsApp, com DDD.', 'erro');
-        const { error } = await sb.from('profiles').update(dados).eq('id', user.id);
-        toast(error ? 'Não foi possível salvar.' : 'Dados salvos!', error ? 'erro' : 'ok');
-      });
-    } },
-      el('div', { class: 'field' }, el('label', { for: 'm-nome', text: 'Nome' }), nome),
-      el('div', { class: 'field' }, el('label', { for: 'm-zap', text: 'WhatsApp' }), zap),
-      el('label', { class: 'check' }, promo, el('span', { text: 'Receber novidades e promoções no WhatsApp' })),
-      el('button', { class: 'btn bloco', type: 'submit', text: 'Salvar meus dados' })),
-    el('p', { class: 'muda pequeno' }, 'Leia a ', el('a', { href: 'termos.html', text: 'política de privacidade' }), '.'),
-    el('button', { class: 'btn sec bloco', type: 'button', text: 'Excluir minha conta', onClick: async (e) => {
-      if (!confirm('Excluir sua conta apaga seu cartão e seus dados pessoais. Isso não pode ser desfeito. Continuar?')) return;
-      await ocupado(e.currentTarget, async () => {
-        const { error } = await sb.rpc('excluir_minha_conta');
-        if (error) return toast(mensagemErro(error, 'Não foi possível excluir agora.'), 'erro');
-        await sb.auth.signOut();
-        location.replace('index.html');
-      });
-    } }));
 }
 
 // Carrossel das peças do mostruário: rolagem com "snap", setas para quem prefere botões.

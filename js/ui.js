@@ -118,7 +118,7 @@ export const pronto = () => $('#app')?.removeAttribute('aria-busy');
 export const NAV_CLIENTE = [
   { href: 'cartao.html', texto: 'Cartão', icone: 'cartao' },
   { href: 'mostruario.html', texto: 'Mostruário', icone: 'loja' },
-  { href: 'index.html', texto: 'Conta', icone: 'conta' },
+  { href: 'conta.html', texto: 'Conta', icone: 'conta' },
 ];
 export const NAV_ADMIN = [
   { href: 'index.html', texto: 'Clientes', icone: 'clientes' },

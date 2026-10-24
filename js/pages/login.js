@@ -2,7 +2,7 @@ import { sb } from '../supabase.js';
 import { el, $, ocupado, toast, whatsappBR, soDigitos, pronto } from '../ui.js';
 
 const TERMOS_VERSAO = '2026-10';
-const NEXT_OK = ['cartao.html', 'mostruario.html'];      // lista fechada: sem redirecionamento aberto
+const NEXT_OK = ['cartao.html', 'mostruario.html', 'conta.html'];      // lista fechada: sem redirecionamento aberto
 let modo = 'entrar';
 
 const proximo = () => {
